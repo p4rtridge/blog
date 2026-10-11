@@ -5,6 +5,8 @@ import { GeistSans } from 'geist/font/sans';
 import { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 
+import site from '../../blog.config.json';
+
 import '../styles/index.css';
 import '../styles/prism.css';
 
@@ -24,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <Component {...pageProps} />
       </div>
-      <Analytics />
+      {site.analyticsEnabled && <Analytics />}
     </>
   );
 }

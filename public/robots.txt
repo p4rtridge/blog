@@ -2,8 +2,48 @@
 User-agent: *
 Allow: /
 
+# GPTBot
+User-agent: GPTBot
+Disallow: /
+
+# OAI-SearchBot
+User-agent: OAI-SearchBot
+Disallow: /
+
+# ChatGPT-User
+User-agent: ChatGPT-User
+Disallow: /
+
+# ClaudeBot
+User-agent: ClaudeBot
+Disallow: /
+
+# Claude-SearchBot
+User-agent: Claude-SearchBot
+Disallow: /
+
+# Claude-User
+User-agent: Claude-User
+Disallow: /
+
+# Google-Extended
+User-agent: Google-Extended
+Disallow: /
+
+# PerplexityBot
+User-agent: PerplexityBot
+Disallow: /
+
+# Perplexity-User
+User-agent: Perplexity-User
+Disallow: /
+
+# CCBot
+User-agent: CCBot
+Disallow: /
+
 # Host
-Host: https://jarocki.me
+Host: http://localhost:3000
 
 # Sitemaps
-Sitemap: https://jarocki.me/sitemap.xml
+Sitemap: http://localhost:3000/sitemap.xml

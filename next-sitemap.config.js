@@ -1,5 +1,21 @@
+const site = require('./blog.config.json');
+
+// robots.txt is advisory; enforce access restrictions at the server or WAF.
+const aiAgents = [
+  'GPTBot',
+  'OAI-SearchBot',
+  'ChatGPT-User',
+  'ClaudeBot',
+  'Claude-SearchBot',
+  'Claude-User',
+  'Google-Extended',
+  'PerplexityBot',
+  'Perplexity-User',
+  'CCBot',
+];
+
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://jarocki.me',
+  siteUrl: site.url,
   generateRobotsTxt: true,
   autoLastmod: false,
   generateIndexSitemap: false,
@@ -11,6 +27,7 @@ module.exports = {
         userAgent: '*',
         allow: '/',
       },
+      ...aiAgents.map((userAgent) => ({ userAgent, disallow: '/' })),
     ],
   },
 };

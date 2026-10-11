@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "es5",
-    "module": "esnext",
+    "target": "esnext",
+    "module": "nodenext",
     "jsx": "preserve",
     "strict": true,
     "esModuleInterop": true,
@@ -11,12 +10,12 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "noEmit": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
     "paths": {
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "@/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules"],

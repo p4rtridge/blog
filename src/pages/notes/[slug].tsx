@@ -6,6 +6,7 @@ import React from 'react';
 
 import { NoteContent } from '../../components/NoteContent';
 import { PageShell } from '../../components/PageShell';
+import site from '../../../blog.config.json';
 import { dotDate } from '../../lib/date';
 import { Note as NoteType, notesApi } from '../../lib/notesApi';
 
@@ -21,8 +22,8 @@ export default function Note({
   older,
 }: Props) {
   const router = useRouter();
-  const url = `${process.env.NEXT_PUBLIC_URL}${router.asPath}`;
-  const openGraphImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
+  const url = `${site.url.replace(/\/$/, '')}${router.asPath}`;
+  const openGraphImageUrl = `${site.url.replace(/\/$/, '')}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function Note({
         images={[openGraphImageUrl]}
         title={title}
         datePublished={createdAt}
-        authorName="Bartosz Jarocki"
+        authorName={site.name}
         description={description}
       />
       <PageShell seoTitle={title} seoDescription={description} current="notes">

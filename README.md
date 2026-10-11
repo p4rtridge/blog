@@ -1,8 +1,6 @@
-# jarocki.me
+# Personal blog
 
-Personal site of Bartosz Jarocki. Notion-backed notes, monochrome, light and dark following the system, type-driven.
-
-[jarocki.me](https://jarocki.me)
+Personal site configured through JSON, with Notion-backed notes and light and dark themes following the system.
 
 ## Stack
 
@@ -13,12 +11,32 @@ Next.js (Pages Router) · Tailwind · Notion API · Geist Sans/Mono/Pixel · Ver
 Requires Node 18+ and pnpm.
 
 ```bash
-cp .env.example .env.local
-# fill in: NEXT_PUBLIC_URL, NOTION_TOKEN, NOTION_DATABASE_ID
+# Create .env.local with NOTION_TOKEN and NOTION_DATABASE_ID.
 
 pnpm install
 pnpm dev
 ```
+
+## Site configuration
+
+Edit `blog.config.json` to configure the site. It replaces the former `bio.ts` and `links.ts` files.
+
+| Setting | Controls |
+| --- | --- |
+| `name`, `bio` | Header, homepage introduction, about text, author metadata, and RSS title |
+| `url` | Canonical URLs, social preview URLs, RSS links, and sitemap; set this to your deployed site's URL |
+| `language` | HTML language |
+| `clock` | Visibility, IANA time zone (such as `Asia/Bangkok`), and location label |
+| `home` | Section labels and number of latest notes |
+| `notes`, `about` | Page titles, descriptions, introduction, and section labels |
+| `links` | Social/contact entries with `key`, `value`, and `href` |
+| `analyticsEnabled` | Vercel Analytics visibility |
+
+Set `clock.enabled` to `false` to hide the clock.
+
+The existing links were preserved during migration; replace them with your own entries. The default `url` is `http://localhost:3000`; change it before deployment. `NEXT_PUBLIC_URL` and `SITE_URL` are no longer used.
+
+JSON edits update during local development. Rebuild and redeploy to apply them to a deployed site. Notes and their contents still come from Notion. Keep Notion credentials in `.env.local`, never in this public JSON file.
 
 ## Notion schema
 
@@ -39,10 +57,9 @@ Notes database properties:
 
 ```
 src/pages/         Routes (Pages Router)
-src/components/    PageShell, Index (rows), Clock, ContributionBars, NoteContent
-src/data/          bio, work, projects, books, links
-src/lib/           notesApi (Notion client), githubActivity (GitHub contributions)
-src/images/travel  Photos for /about
+src/components/    PageShell, Index (rows), Clock, NoteContent
+blog.config.json   Profile and display configuration
+src/lib/           notesApi (Notion client)
 src/styles/        Color tokens, row and prose styles, monochrome Prism theme
 ```
 

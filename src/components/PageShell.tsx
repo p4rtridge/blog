@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Name } from '../data/bio';
+import site from '../../blog.config.json';
 
-const sections = ['notes', 'work', 'about'] as const;
+const sections = ['notes', 'about'] as const;
 
 type Section = (typeof sections)[number];
 
@@ -19,8 +19,8 @@ type Props = {
 export function PageShell({ seoTitle, seoDescription, current, children }: Props) {
   const router = useRouter();
   const path = router.asPath === '/' ? '' : router.asPath;
-  const canonical = `${process.env.NEXT_PUBLIC_URL}${path}`;
-  const ogImage = `${process.env.NEXT_PUBLIC_URL}/api/og?title=${encodeURIComponent(seoTitle)}&description=${encodeURIComponent(seoDescription ?? '')}`;
+  const canonical = `${site.url.replace(/\/$/, '')}${path}`;
+  const ogImage = `${site.url.replace(/\/$/, '')}/api/og?title=${encodeURIComponent(seoTitle)}&description=${encodeURIComponent(seoDescription ?? '')}`;
 
   return (
     <>
@@ -34,7 +34,7 @@ export function PageShell({ seoTitle, seoDescription, current, children }: Props
         <div className="mx-auto max-w-[80ch]">
           <header className="flex flex-wrap items-baseline justify-between gap-x-[3ch] gap-y-3">
             <Link href="/" className="font-pixel text-[28px] leading-none text-ink">
-              {Name}
+              {site.name}
             </Link>
             <nav className="flex gap-[2.5ch]">
               {sections.map((section) => (
@@ -44,7 +44,7 @@ export function PageShell({ seoTitle, seoDescription, current, children }: Props
                   aria-current={section === current ? 'page' : undefined}
                   className="faint-link aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[5px]"
                 >
-                  {section}
+                  {site[section].title}
                 </Link>
               ))}
             </nav>

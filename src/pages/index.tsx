@@ -1,74 +1,31 @@
 import { GetStaticProps } from 'next';
 
 import { Clock } from '../components/Clock';
-import { ContributionBars } from '../components/ContributionBars';
-import {
-  ExternalLink,
-  IndexList,
-  IndexRow,
-  IndexSection,
-  Lede,
-  NoteRow,
-  ProjectRow,
-  WorkRow,
-} from '../components/Index';
+import { IndexList, IndexRow, IndexSection, Lede, NoteRow } from '../components/Index';
 import { PageShell } from '../components/PageShell';
-import { Elsewhere, GitHubUser } from '../data/links';
-import { SideProjects } from '../data/projects';
-import { Work } from '../data/work';
-import { Activity, fetchActivity } from '../lib/githubActivity';
+import site from '../../blog.config.json';
 import { Note, notesApi } from '../lib/notesApi';
 
-const seoTitle = 'Bartosz Jarocki';
-const seoDescription =
-  'Building AI at Motion. Exploring what software engineering looks like when agents do most of the typing.';
+const seoTitle = site.name;
+const seoDescription = site.bio;
 
 type Props = {
   latestNotes: Note[];
   noteCount: number;
-  activity: Activity | null;
 };
 
-export default function Home({ latestNotes, noteCount, activity }: Props) {
+export default function Home({ latestNotes, noteCount }: Props) {
   return (
     <PageShell seoTitle={seoTitle} seoDescription={seoDescription}>
       <Lede>
-        <p>
-          building AI at{' '}
-          <ExternalLink href="https://motionapp.com" className="text-link">
-            motion
-          </ExternalLink>{' '}
-          —{' '}
-          <ExternalLink href="https://motionapp.com/careers" className="text-link">
-            we&apos;re hiring
-          </ExternalLink>
-          !
-          <br />
-          <span className="text-body">
-            exploring what software engineering looks like when agents do most of the typing.
-          </span>
-        </p>
+        <p className="text-body">{site.bio}</p>
       </Lede>
-      <Clock />
+      {site.clock.enabled && <Clock />}
 
-      {activity && (
-        <IndexSection
-          label="github"
-          more={{
-            href: `https://github.com/${GitHubUser}`,
-            label: (
-              <>
-                {GitHubUser} <span aria-hidden="true">↗</span>
-              </>
-            ),
-            external: true,
-          }}
-        >
-          <ContributionBars activity={activity} />
-        </IndexSection>
-      )}
-
-      <IndexSection label="notes" more={{ href: '/notes', label: `all ${noteCount} →` }}>
+      <IndexSection
+        label={site.home.notesLabel}
+        more={{ href: '/notes', label: `all ${noteCount} →` }}
+      >
         <IndexList>
           {latestNotes.map((note) => (
             <NoteRow key={note.slug} note={note} />
@@ -76,25 +33,9 @@ export default function Home({ latestNotes, noteCount, activity }: Props) {
         </IndexList>
       </IndexSection>
 
-      <IndexSection label="projects">
+      <IndexSection label={site.home.linksLabel}>
         <IndexList>
-          {SideProjects.map((project) => (
-            <ProjectRow key={project.title} project={project} />
-          ))}
-        </IndexList>
-      </IndexSection>
-
-      <IndexSection label="work" more={{ href: '/work', label: 'more →' }}>
-        <IndexList>
-          {Work.slice(0, 3).map((entry) => (
-            <WorkRow key={entry.company} entry={entry} />
-          ))}
-        </IndexList>
-      </IndexSection>
-
-      <IndexSection label="elsewhere">
-        <IndexList>
-          {Elsewhere.map((link) => (
+          {site.links.map((link) => (
             <IndexRow
               key={link.key}
               href={link.href}
@@ -111,13 +52,10 @@ export default function Home({ latestNotes, noteCount, activity }: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const [notes, activity] = await Promise.all([
-    notesApi.getNotes('desc'),
-    fetchActivity(GitHubUser),
-  ]);
+  const notes = await notesApi.getNotes('desc');
 
   return {
-    props: { latestNotes: notes.slice(0, 5), noteCount: notes.length, activity },
+    props: { latestNotes: notes.slice(0, site.home.latestNotesLimit), noteCount: notes.length },
     revalidate: 3600,
   };
 };

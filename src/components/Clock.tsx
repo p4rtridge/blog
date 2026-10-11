@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 
-const wroclawTime = new Intl.DateTimeFormat('en-GB', {
-  timeZone: 'Europe/Warsaw',
+import site from '../../blog.config.json';
+
+const localTime = new Intl.DateTimeFormat('en-GB', {
+  timeZone: site.clock.timeZone,
   hour: '2-digit',
   minute: '2-digit',
   hourCycle: 'h23',
 });
 
 function readTime() {
-  const parts = wroclawTime.formatToParts(new Date());
+  const parts = localTime.formatToParts(new Date());
   const part = (type: 'hour' | 'minute') => parts.find((p) => p.type === type)?.value ?? '--';
   return { hours: part('hour'), minutes: part('minute') };
 }
@@ -34,7 +36,7 @@ export function Clock() {
         <span className="motion-safe:animate-blink">:</span>
         {time.minutes}
       </span>
-      <span className="text-faint">in Wrocław</span>
+      <span className="text-faint">{site.clock.label}</span>
     </p>
   );
 }
