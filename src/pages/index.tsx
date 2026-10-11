@@ -1,0 +1,123 @@
+import { GetStaticProps } from 'next';
+
+import { Clock } from '../components/Clock';
+import { ContributionBars } from '../components/ContributionBars';
+import {
+  ExternalLink,
+  IndexList,
+  IndexRow,
+  IndexSection,
+  Lede,
+  NoteRow,
+  ProjectRow,
+  WorkRow,
+} from '../components/Index';
+import { PageShell } from '../components/PageShell';
+import { Elsewhere, GitHubUser } from '../data/links';
+import { SideProjects } from '../data/projects';
+import { Work } from '../data/work';
+import { Activity, fetchActivity } from '../lib/githubActivity';
+import { Note, notesApi } from '../lib/notesApi';
+
+const seoTitle = 'Bartosz Jarocki';
+const seoDescription =
+  'Building AI at Motion. Exploring what software engineering looks like when agents do most of the typing.';
+
+type Props = {
+  latestNotes: Note[];
+  noteCount: number;
+  activity: Activity | null;
+};
+
+export default function Home({ latestNotes, noteCount, activity }: Props) {
+  return (
+    <PageShell seoTitle={seoTitle} seoDescription={seoDescription}>
+      <Lede>
+        <p>
+          building AI at{' '}
+          <ExternalLink href="https://motionapp.com" className="text-link">
+            motion
+          </ExternalLink>{' '}
+          —{' '}
+          <ExternalLink href="https://motionapp.com/careers" className="text-link">
+            we&apos;re hiring
+          </ExternalLink>
+          !
+          <br />
+          <span className="text-body">
+            exploring what software engineering looks like when agents do most of the typing.
+          </span>
+        </p>
+      </Lede>
+      <Clock />
+
+      {activity && (
+        <IndexSection
+          label="github"
+          more={{
+            href: `https://github.com/${GitHubUser}`,
+            label: (
+              <>
+                {GitHubUser} <span aria-hidden="true">↗</span>
+              </>
+            ),
+            external: true,
+          }}
+        >
+          <ContributionBars activity={activity} />
+        </IndexSection>
+      )}
+
+      <IndexSection label="notes" more={{ href: '/notes', label: `all ${noteCount} →` }}>
+        <IndexList>
+          {latestNotes.map((note) => (
+            <NoteRow key={note.slug} note={note} />
+          ))}
+        </IndexList>
+      </IndexSection>
+
+      <IndexSection label="projects">
+        <IndexList>
+          {SideProjects.map((project) => (
+            <ProjectRow key={project.title} project={project} />
+          ))}
+        </IndexList>
+      </IndexSection>
+
+      <IndexSection label="work" more={{ href: '/work', label: 'more →' }}>
+        <IndexList>
+          {Work.slice(0, 3).map((entry) => (
+            <WorkRow key={entry.company} entry={entry} />
+          ))}
+        </IndexList>
+      </IndexSection>
+
+      <IndexSection label="elsewhere">
+        <IndexList>
+          {Elsewhere.map((link) => (
+            <IndexRow
+              key={link.key}
+              href={link.href}
+              external={link.href.startsWith('http')}
+              lead={link.key}
+              main={link.value}
+              trail={<span aria-hidden="true">↗</span>}
+            />
+          ))}
+        </IndexList>
+      </IndexSection>
+    </PageShell>
+  );
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const [notes, activity] = await Promise.all([
+    notesApi.getNotes('desc'),
+    fetchActivity(GitHubUser),
+  ]);
+
+  return {
+    props: { latestNotes: notes.slice(0, 5), noteCount: notes.length, activity },
+    revalidate: 3600,
+  };
+};
