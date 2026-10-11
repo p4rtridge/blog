@@ -90,7 +90,7 @@ Use pnpm; `package.json` pins the package-manager version and `pnpm-lock.yaml` i
 - `pnpm format` — format files under `src`; prefer formatting only touched files when avoiding unrelated changes.
 - `pnpm postbuild` — regenerate sitemap/robots files from build output.
 
-Run checks appropriate to the change and report any failures accurately. Recent type checks reported existing errors in the Geist font imports in `_app.tsx` and `import.meta` in `api/og.tsx` under the current NodeNext configuration. Recheck rather than assuming these remain or claiming a clean type check. Documentation-only changes need no application build.
+Run checks appropriate to the change and report any failures accurately. TypeScript uses `module: "esnext"` and `moduleResolution: "bundler"` to match the Next.js build; preserve these settings so Geist declarations and `import.meta` resolve correctly. Documentation-only changes need no application build.
 
 ## Styling and conventions
 
