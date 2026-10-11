@@ -110,12 +110,7 @@ export function NoteRow({ note, withTags = false }: { note: Note; withTags?: boo
     <IndexRow
       href={`/notes/${note.slug}`}
       lead={dotDate(note.publishedAt)}
-      main={
-        <>
-          {note.title}
-          {note.inProgress && <span className="text-faint"> (wip)</span>}
-        </>
-      }
+      main={note.title}
       trail={withTags ? note.tags.join(', ') : undefined}
       clip
     />

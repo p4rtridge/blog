@@ -45,13 +45,13 @@ Notes database properties:
 | Property      | Type          |
 | ------------- | ------------- |
 | `title`       | Title         |
-| `slug`        | Rich Text     |
 | `description` | Rich Text     |
 | `published`   | Checkbox      |
-| `publishedAt` | Date          |
+| `published_at` | Date         |
 | `hashtags`    | Multi-select  |
-| `inProgress`  | Checkbox      |
 | `cover`       | Files & Media |
+
+Post slugs are generated from the full title: lowercase with spaces replaced by dashes (for example, `My First Post` becomes `/notes/my-first-post`). No Notion `slug` property is needed. Use titles that produce unique slugs; changing a title changes the post URL.
 
 ## Layout
 

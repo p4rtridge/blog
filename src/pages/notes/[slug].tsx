@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function Note({
-  note: { title, description, createdAt, publishedAt, inProgress, tags },
+  note: { title, description, createdAt, publishedAt, tags },
   noteContent,
   older,
 }: Props) {
@@ -40,7 +40,6 @@ export default function Note({
           <header>
             <p className="text-faint">
               <time dateTime={publishedAt}>{dotDate(publishedAt)}</time>
-              {inProgress && ' (wip)'}
               {tags.length > 0 && ' · '}
               {tags.map((tag, i) => (
                 <React.Fragment key={tag}>

@@ -61,15 +61,13 @@ The Notion database must provide these properties:
 | Property | Type |
 | --- | --- |
 | `title` | Title |
-| `slug` | Rich text |
 | `description` | Rich text |
 | `published` | Checkbox |
-| `publishedAt` | Date |
+| `published_at` | Date |
 | `hashtags` | Multi-select |
-| `inProgress` | Checkbox |
 | `cover` | Files & media (documented in README) |
 
-`notesApi.ts` reads the page object's cover for the note cover image. Page IDs and timestamps are Notion metadata, not database properties. Only notes with `published` checked appear. Keep property names and types compatible with the mapper in `notesApi.ts`; it assumes populated title, slug, description, and publication date values.
+`notesApi.ts` reads the page object's cover for the note cover image. Page IDs and timestamps are Notion metadata, not database properties. Only notes with `published` checked appear. Keep property names and types compatible with the mapper in `notesApi.ts`; it assumes populated title, description, and publication date values. Slugs are derived from the full title by trimming, lowercasing, and replacing consecutive whitespace with a dash; no Notion `slug` property is required. Titles must produce unique slugs, and renaming a title changes its URL.
 
 ## Routing and generation
 

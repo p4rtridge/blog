@@ -19,7 +19,6 @@ export type Note = {
   slug: string;
   isPublished: boolean;
   publishedAt: string;
-  inProgress: boolean;
 };
 
 const noop = async (block: BlockObjectResponse) => block;
@@ -143,6 +142,11 @@ class NotesApi {
           throw new Error('Notion page is not a full page');
         }
 
+        const title =
+          'title' in page.properties.title
+            ? page.properties.title.title.map((part) => part.plain_text).join('')
+            : '';
+
         return {
           id: page.id,
           createdAt: page.created_time,
@@ -152,19 +156,16 @@ class NotesApi {
             'multi_select' in page.properties.hashtags
               ? page.properties.hashtags.multi_select.map((tag) => tag.name)
               : [],
-          title: 'title' in page.properties.title ? page.properties.title.title[0].plain_text : '',
+          title,
           description:
             'rich_text' in page.properties.description
               ? page.properties.description.rich_text[0].plain_text
               : '',
-          slug:
-            'rich_text' in page.properties.slug ? page.properties.slug.rich_text[0].plain_text : '',
+          slug: title.trim().toLowerCase().replace(/\s+/g, '-'),
           isPublished:
             'checkbox' in page.properties.published ? page.properties.published.checkbox : false,
           publishedAt:
-            'date' in page.properties.publishedAt ? page.properties.publishedAt.date!.start : '',
-          inProgress:
-            'checkbox' in page.properties.inProgress ? page.properties.inProgress.checkbox : false,
+            'date' in page.properties.published_at ? page.properties.published_at.date!.start : '',
         };
       })
       .filter((post) => post.isPublished);
