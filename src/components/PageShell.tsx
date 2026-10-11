@@ -5,7 +5,7 @@ import React from 'react';
 
 import site from '../../blog.config.json';
 
-const sections = ['notes', 'about'] as const;
+const sections = ['blog', 'about'] as const;
 
 type Section = (typeof sections)[number];
 

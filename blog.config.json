@@ -10,14 +10,9 @@
     "label": "in Vietnam"
   },
   "home": {
-    "notesLabel": "notes",
     "linksLabel": "contact",
-    "latestNotesLimit": 5
-  },
-  "notes": {
-    "title": "Notes",
-    "description": "All of my thoughts on programming, building products, leadership, and more. Not structured.",
-    "introduction": "Things I've written. Mostly to myself."
+    "latestNotesLimit": 5,
+    "blogLabel": "blog"
   },
   "about": {
     "title": "About",
@@ -34,5 +29,10 @@
       "value": "p4rtridge",
       "href": "https://github.com/p4rtridge"
     }
-  ]
+  ],
+  "blog": {
+    "title": "Blog",
+    "description": "All of my thoughts on programming, building products, leadership, and more. Not structured.",
+    "introduction": "Things I've written. Mostly to myself."
+  }
 }

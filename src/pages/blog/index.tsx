@@ -5,18 +5,18 @@ import { PageShell } from '../../components/PageShell';
 import site from '../../../blog.config.json';
 import { Note, notesApi } from '../../lib/notesApi';
 
-const seoTitle = site.notes.title;
-const seoDescription = site.notes.description;
+const seoTitle = site.blog.title;
+const seoDescription = site.blog.description;
 
 interface Props {
   notes: Note[];
 }
 
-export default function Notes({ notes }: Props) {
+export default function Blog({ notes }: Props) {
   return (
-    <PageShell seoTitle={seoTitle} seoDescription={seoDescription} current="notes">
+    <PageShell seoTitle={seoTitle} seoDescription={seoDescription} current="blog">
       <Lede>
-        <p>{site.notes.introduction}</p>
+        <p>{site.blog.introduction}</p>
       </Lede>
       <IndexSection label={entriesLabel(notes.length)}>
         <IndexList>

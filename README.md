@@ -28,7 +28,7 @@ Edit `blog.config.json` to configure the site. It replaces the former `bio.ts` a
 | `language` | HTML language |
 | `clock` | Visibility, IANA time zone (such as `Asia/Bangkok`), and location label |
 | `home` | Section labels and number of latest notes |
-| `notes`, `about` | Page titles, descriptions, introduction, and section labels |
+| `blog`, `about` | Page titles, descriptions, introduction, and section labels |
 | `links` | Social/contact entries with `key`, `value`, and `href` |
 | `analyticsEnabled` | Vercel Analytics visibility |
 
@@ -51,7 +51,7 @@ Notes database properties:
 | `hashtags`    | Multi-select  |
 | `cover`       | Files & Media |
 
-Post slugs are generated from the full title: lowercase with spaces replaced by dashes (for example, `My First Post` becomes `/notes/my-first-post`). No Notion `slug` property is needed. Use titles that produce unique slugs; changing a title changes the post URL.
+Post slugs are generated from the full title: lowercase with spaces replaced by dashes (for example, `My First Post` becomes `/blog/my-first-post`). No Notion `slug` property is needed. Use titles that produce unique slugs; changing a title changes the post URL.
 
 ## Layout
 

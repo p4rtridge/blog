@@ -24,8 +24,8 @@ const config = {
   async redirects() {
     return [
       {
-        source: '/blog/:slug*',
-        destination: '/notes/:slug*',
+        source: '/notes/:slug*',
+        destination: '/blog/:slug*',
         permanent: true,
       },
     ];

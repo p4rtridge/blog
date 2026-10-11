@@ -15,7 +15,7 @@ export default function Tag({ tag, relatedNotes }: Props) {
   const seoDescription = `Notes tagged ${tag}.`;
 
   return (
-    <PageShell seoTitle={seoTitle} seoDescription={seoDescription} current="notes">
+    <PageShell seoTitle={seoTitle} seoDescription={seoDescription} current="blog">
       <Lede>
         <p>tagged #{tag}</p>
       </Lede>
@@ -27,8 +27,8 @@ export default function Tag({ tag, relatedNotes }: Props) {
         </IndexList>
       </IndexSection>
       <p className="mt-14">
-        <Link href="/notes" className="faint-link">
-          ← all notes
+        <Link href="/blog" className="faint-link">
+          ← all posts
         </Link>
       </p>
     </PageShell>

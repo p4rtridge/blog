@@ -35,7 +35,7 @@ export default function Note({
         authorName={site.name}
         description={description}
       />
-      <PageShell seoTitle={title} seoDescription={description} current="notes">
+      <PageShell seoTitle={title} seoDescription={description} current="blog">
         <article className="mt-[72px]">
           <header>
             <p className="text-faint">
@@ -58,11 +58,11 @@ export default function Note({
           <NoteContent blocks={noteContent} className="mt-11" />
 
           <footer className="mt-[72px] flex max-w-[37rem] justify-between gap-[3ch]">
-            <Link href="/notes" className="faint-link shrink-0">
-              ← all notes
+            <Link href="/blog" className="faint-link shrink-0">
+              ← all posts
             </Link>
             {older && (
-              <Link href={`/notes/${older.slug}`} className="faint-link text-right">
+              <Link href={`/blog/${older.slug}`} className="faint-link text-right">
                 next: {older.title} →
               </Link>
             )}

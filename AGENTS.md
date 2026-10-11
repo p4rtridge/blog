@@ -6,7 +6,7 @@ Guidance for coding agents working in this repository.
 
 This is a personal blog built with Next.js 14 (Pages Router), React, TypeScript, and Tailwind CSS. Profile and display settings come from the root `blog.config.json`; notes and their contents come from Notion.
 
-The homepage contains an introduction, an optional clock, recent notes, and contact links. The About page displays the biography. Navigation contains Notes and About. Work, projects, GitHub activity, books, photos, and avatars have been removed; do not restore them unless requested.
+The homepage contains an introduction, an optional clock, recent notes, and contact links. The About page displays the biography. Navigation contains Blog and About. Work, projects, GitHub activity, books, photos, and avatars have been removed; do not restore them unless requested.
 
 ## Current structure
 
@@ -15,8 +15,8 @@ blog.config.json                 Public profile and display settings
 src/pages/
   index.tsx                      Homepage and recent notes
   about.tsx                      Biography
-  notes/index.tsx                Published notes list
-  notes/[slug].tsx               Individual note and next-note link
+  blog/index.tsx                Published notes list
+  blog/[slug].tsx               Individual note and next-note link
   tags/[tag].tsx                 Notes filtered by tag
   api/rss.xml.ts                 RSS feed
   api/og.tsx                     Dynamic social preview image
@@ -49,7 +49,7 @@ There are no `src/data`, `src/images`, `public/photos`, author-image, or `screen
 
 ## Configuration and content
 
-- Use `blog.config.json` for the name, biography, URL, language, clock settings, homepage labels and note limit, Notes/About page text, contact links, and analytics flag.
+- Use `blog.config.json` for the name, biography, URL, language, clock settings, homepage labels and note limit, Blog/About page text, contact links, and analytics flag.
 - Keep configurable profile text in JSON rather than hardcoding it in components.
 - `url` supplies canonical URLs, social preview links, RSS URLs, and the sitemap origin. Set it to the deployed site's origin before deployment. `NEXT_PUBLIC_URL` and `SITE_URL` are no longer used.
 - JSON imports are bundled into the site. Local development reflects edits; deployed sites require a rebuild and redeploy.
@@ -73,7 +73,7 @@ The Notion database must provide these properties:
 
 - Use Pages Router patterns, including `getStaticProps` and `getStaticPaths` where applicable.
 - The homepage revalidates after 3,600 seconds; notes and tag pages after 10 seconds. Dynamic note and tag routes use `fallback: 'blocking'`.
-- `next.config.mjs` redirects `/blog/:slug*` to `/notes/:slug*` and configures remote image hosts for Notion content.
+- `next.config.mjs` redirects `/notes/:slug*` to `/blog/:slug*` and configures remote image hosts for Notion content.
 - `pnpm build` invokes the `postbuild` sitemap generator. Although the old checked-in `public/sitemap.xml` was removed, builds can generate it again and regenerate `public/robots.txt`.
 - Edit crawler policies in `next-sitemap.config.js` so builds preserve them. Known AI agents receive `Disallow: /`; general crawlers are allowed. Robots.txt is advisory, not enforced access control.
 

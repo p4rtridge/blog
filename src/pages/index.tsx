@@ -23,8 +23,8 @@ export default function Home({ latestNotes, noteCount }: Props) {
       {site.clock.enabled && <Clock />}
 
       <IndexSection
-        label={site.home.notesLabel}
-        more={{ href: '/notes', label: `all ${noteCount} →` }}
+        label={site.home.blogLabel}
+        more={{ href: '/blog', label: `all ${noteCount} →` }}
       >
         <IndexList>
           {latestNotes.map((note) => (
