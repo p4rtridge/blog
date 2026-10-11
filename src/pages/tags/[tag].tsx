@@ -1,3 +1,4 @@
+import site from '../../../blog.config.json';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 
@@ -45,7 +46,7 @@ export const getStaticProps: GetStaticProps<Props, { tag: string }> = async (con
 
   return {
     props: { relatedNotes, tag },
-    revalidate: 10,
+    revalidate: site.blog.revalidateSeconds,
   };
 };
 

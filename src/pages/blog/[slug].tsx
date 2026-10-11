@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (co
 
   return {
     props: { note, noteContent, older },
-    revalidate: 10,
+    revalidate: site.blog.revalidateSeconds,
   };
 };
 

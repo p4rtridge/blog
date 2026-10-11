@@ -23,7 +23,7 @@ export default function Home({ latestNotes, noteCount }: Props) {
       {site.clock.enabled && <Clock />}
 
       <IndexSection
-        label={site.home.blogLabel}
+        label="blog"
         more={{ href: '/blog', label: `all ${noteCount} →` }}
       >
         <IndexList>
@@ -33,7 +33,7 @@ export default function Home({ latestNotes, noteCount }: Props) {
         </IndexList>
       </IndexSection>
 
-      <IndexSection label={site.home.linksLabel}>
+      <IndexSection label="contact">
         <IndexList>
           {site.links.map((link) => (
             <IndexRow
@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const notes = await notesApi.getNotes('desc');
 
   return {
-    props: { latestNotes: notes.slice(0, site.home.latestNotesLimit), noteCount: notes.length },
-    revalidate: 3600,
+    props: { latestNotes: notes.slice(0, site.blog.latestNotesLimit), noteCount: notes.length },
+    revalidate: site.blog.revalidateSeconds,
   };
 };

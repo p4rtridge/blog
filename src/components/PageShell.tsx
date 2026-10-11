@@ -44,7 +44,7 @@ export function PageShell({ seoTitle, seoDescription, current, children }: Props
                   aria-current={section === current ? 'page' : undefined}
                   className="faint-link aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[5px]"
                 >
-                  {site[section].title}
+                  {section === 'about' ? 'About' : 'Blog'}
                 </Link>
               ))}
             </nav>

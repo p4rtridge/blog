@@ -21,7 +21,7 @@ src/pages/
   api/rss.xml.ts                 RSS feed
   api/og.tsx                     Dynamic social preview image
   _app.tsx                       Fonts, global styles, optional analytics
-  _document.tsx                  HTML language, favicon links, theme metadata
+  _document.tsx                  Fixed English HTML language, favicon links, theme metadata
   404.tsx, 500.tsx               Error pages
 src/components/
   PageShell.tsx                  Shared layout, navigation, and SEO metadata
@@ -49,8 +49,10 @@ There are no `src/data`, `src/images`, `public/photos`, author-image, or `screen
 
 ## Configuration and content
 
-- Use `blog.config.json` for the name, biography, URL, language, clock settings, homepage labels and note limit, Blog/About page text, contact links, and analytics flag.
-- Keep configurable profile text in JSON rather than hardcoding it in components.
+- Use `blog.config.json` for the name, biography, URL, clock settings, homepage note limit (`blog.latestNotesLimit`), contact links, and analytics flag.
+- The homepage section labels (`blog` and `contact`) are intentionally hardcoded in `src/pages/index.tsx`; there is no `home` config section.
+- Blog titles and descriptions are hardcoded in `src/pages/blog/index.tsx`, along with its introduction. Blog and About navigation labels are hardcoded in `PageShell.tsx`; `blog` in the JSON contains only `revalidateSeconds` and `latestNotesLimit`.
+- Keep configurable profile text in JSON rather than hardcoding it in components. The About title and description are intentionally hardcoded in `src/pages/about.tsx`, and its navigation label in `PageShell.tsx`; the biography still comes from JSON.
 - `url` supplies canonical URLs, social preview links, RSS URLs, and the sitemap origin. Set it to the deployed site's origin before deployment. `NEXT_PUBLIC_URL` and `SITE_URL` are no longer used.
 - JSON imports are bundled into the site. Local development reflects edits; deployed sites require a rebuild and redeploy.
 - Treat the JSON as public data. Keep `NOTION_TOKEN` and `NOTION_DATABASE_ID` in `.env.local` or hosting environment settings, never in JSON or client-side code.
@@ -72,7 +74,7 @@ The Notion database must provide these properties:
 ## Routing and generation
 
 - Use Pages Router patterns, including `getStaticProps` and `getStaticPaths` where applicable.
-- The homepage revalidates after 3,600 seconds; notes and tag pages after 10 seconds. Dynamic note and tag routes use `fallback: 'blocking'`.
+- The homepage, blog list, post pages, and tag pages use ISR with `revalidate: site.blog.revalidateSeconds`, configured in `blog.config.json` as a positive integer in seconds (default `1800`, or 30 minutes). Regeneration is triggered by a request after the interval, not by a scheduled background fetch. Dynamic note and tag routes use `fallback: 'blocking'`.
 - `next.config.mjs` redirects `/notes/:slug*` to `/blog/:slug*` and configures remote image hosts for Notion content.
 - `pnpm build` invokes the `postbuild` sitemap generator. Although the old checked-in `public/sitemap.xml` was removed, builds can generate it again and regenerate `public/robots.txt`.
 - Edit crawler policies in `next-sitemap.config.js` so builds preserve them. Known AI agents receive `Disallow: /`; general crawlers are allowed. Robots.txt is advisory, not enforced access control.

@@ -1,10 +1,8 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 
-import site from '../../blog.config.json';
-
 export default function Document() {
   return (
-    <Html className="antialiased" lang={site.language}>
+    <Html className="antialiased" lang="en">
       <Head>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />

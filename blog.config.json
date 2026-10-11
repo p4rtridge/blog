@@ -2,22 +2,6 @@
   "name": "Partridge",
   "bio": "I'm Duc Nguyen Anh, also known as partridge. I love programming and dogs. Welcome to my blog.",
   "url": "https://p4rtridge.vercel.app",
-  "language": "en",
-  "analyticsEnabled": true,
-  "clock": {
-    "enabled": true,
-    "timeZone": "Asia/Ho_Chi_Minh",
-    "label": "in Vietnam"
-  },
-  "home": {
-    "linksLabel": "contact",
-    "latestNotesLimit": 5,
-    "blogLabel": "blog"
-  },
-  "about": {
-    "title": "About",
-    "description": "A few words about me."
-  },
   "links": [
     {
       "key": "email",
@@ -30,9 +14,14 @@
       "href": "https://github.com/p4rtridge"
     }
   ],
+  "analyticsEnabled": true,
+  "clock": {
+    "enabled": true,
+    "timeZone": "Asia/Ho_Chi_Minh",
+    "label": "in Vietnam"
+  },
   "blog": {
-    "title": "Blog",
-    "description": "All of my thoughts on programming, building products, leadership, and more. Not structured.",
-    "introduction": "Things I've written. Mostly to myself."
+    "revalidateSeconds": 3600,
+    "latestNotesLimit": 5
   }
 }

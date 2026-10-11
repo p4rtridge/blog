@@ -25,14 +25,15 @@ Edit `blog.config.json` to configure the site. It replaces the former `bio.ts` a
 | --- | --- |
 | `name`, `bio` | Header, homepage introduction, about text, author metadata, and RSS title |
 | `url` | Canonical URLs, social preview URLs, RSS links, and sitemap; set this to your deployed site's URL |
-| `language` | HTML language |
 | `clock` | Visibility, IANA time zone (such as `Asia/Bangkok`), and location label |
-| `home` | Section labels and number of latest notes |
-| `blog`, `about` | Page titles, descriptions, introduction, and section labels |
+| `blog.latestNotesLimit` | Number of latest posts displayed on the homepage |
+| `blog.revalidateSeconds` | ISR interval for the homepage, blog list, posts, and tag pages; default `1800` (30 minutes) |
 | `links` | Social/contact entries with `key`, `value`, and `href` |
 | `analyticsEnabled` | Vercel Analytics visibility |
 
-Set `clock.enabled` to `false` to hide the clock.
+The HTML language is hardcoded as `en` in `src/pages/_document.tsx`. The Blog title, description, and introduction are hardcoded in `src/pages/blog/index.tsx`, with navigation labels in `src/components/PageShell.tsx`. The homepage section labels (`blog` and `contact`) are hardcoded in `src/pages/index.tsx`. The About title and description are hardcoded in `src/pages/about.tsx`; its biography still uses `bio` from the config.
+
+Set `clock.enabled` to `false` to hide the clock. Set `blog.revalidateSeconds` to a positive integer in seconds. Pages regenerate when visited after this interval; the setting is not a scheduled background fetch.
 
 The existing links were preserved during migration; replace them with your own entries. The default `url` is `http://localhost:3000`; change it before deployment. `NEXT_PUBLIC_URL` and `SITE_URL` are no longer used.
 

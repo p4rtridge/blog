@@ -5,8 +5,8 @@ import { PageShell } from '../../components/PageShell';
 import site from '../../../blog.config.json';
 import { Note, notesApi } from '../../lib/notesApi';
 
-const seoTitle = site.blog.title;
-const seoDescription = site.blog.description;
+const seoTitle = "Blog";
+const seoDescription = "All of my thoughts on programming, building products, and more. Not structured.";
 
 interface Props {
   notes: Note[];
@@ -16,7 +16,7 @@ export default function Blog({ notes }: Props) {
   return (
     <PageShell seoTitle={seoTitle} seoDescription={seoDescription} current="blog">
       <Lede>
-        <p>{site.blog.introduction}</p>
+        <p>Things I&apos;ve written.</p>
       </Lede>
       <IndexSection label={entriesLabel(notes.length)}>
         <IndexList>
@@ -34,6 +34,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   return {
     props: { notes },
-    revalidate: 10,
+    revalidate: site.blog.revalidateSeconds,
   };
 };

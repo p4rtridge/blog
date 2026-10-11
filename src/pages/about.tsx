@@ -2,8 +2,8 @@ import { Lede } from '../components/Index';
 import { PageShell } from '../components/PageShell';
 import site from '../../blog.config.json';
 
-const seoTitle = site.about.title;
-const seoDescription = site.about.description;
+const seoTitle = 'About';
+const seoDescription = 'A few words about me.';
 
 export default function About() {
   return (
