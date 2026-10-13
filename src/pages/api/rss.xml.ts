@@ -17,7 +17,7 @@ const rss: NextApiHandler = async (req, res) => {
       title: post.title,
       url: `${site.url.replace(/\/$/, '')}/blog/${post.slug}`,
       date: post.publishedAt,
-      description: post.description,
+      description: '',
     });
   });
 

@@ -31,7 +31,7 @@ Edit `blog.config.json` to configure the site. It replaces the former `bio.ts` a
 | `links` | Social/contact entries with `key`, `value`, and `href` |
 | `analyticsEnabled` | Vercel Analytics visibility |
 
-The HTML language is hardcoded as `en` in `src/pages/_document.tsx`. The Blog title, description, and introduction are hardcoded in `src/pages/blog/index.tsx`, with navigation labels in `src/components/PageShell.tsx`. The homepage section labels (`blog` and `contact`) are hardcoded in `src/pages/index.tsx`. The About title and description are hardcoded in `src/pages/about.tsx`; its biography still uses `bio` from the config.
+The HTML language is hardcoded as `en` in `src/pages/_document.tsx`. The Blog title and introduction are hardcoded in `src/pages/blog/index.tsx`, with navigation labels in `src/components/PageShell.tsx`. The homepage section labels (`blog` and `contact`) are hardcoded in `src/pages/index.tsx`. The About title and description are hardcoded in `src/pages/about.tsx`; its biography still uses `bio` from the config.
 
 Set `clock.enabled` to `false` to hide the clock. Set `blog.revalidateSeconds` to a positive integer in seconds. Pages regenerate when visited after this interval; the setting is not a scheduled background fetch.
 
@@ -46,7 +46,6 @@ Notes database properties:
 | Property      | Type          |
 | ------------- | ------------- |
 | `title`       | Title         |
-| `description` | Rich Text     |
 | `published`   | Checkbox      |
 | `published_at` | Date         |
 | `hashtags`    | Multi-select  |

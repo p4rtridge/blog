@@ -5,8 +5,7 @@ import { PageShell } from '../../components/PageShell';
 import site from '../../../blog.config.json';
 import { Note, notesApi } from '../../lib/notesApi';
 
-const seoTitle = "Blog";
-const seoDescription = "All of my thoughts on programming, building products, and more. Not structured.";
+const seoTitle = 'Blog';
 
 interface Props {
   notes: Note[];
@@ -14,7 +13,7 @@ interface Props {
 
 export default function Blog({ notes }: Props) {
   return (
-    <PageShell seoTitle={seoTitle} seoDescription={seoDescription} current="blog">
+    <PageShell seoTitle={seoTitle} current="blog">
       <Lede>
         <p>Things I&apos;ve written.</p>
       </Lede>

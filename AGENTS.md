@@ -51,7 +51,7 @@ There are no `src/data`, `src/images`, `public/photos`, author-image, or `screen
 
 - Use `blog.config.json` for the name, biography, URL, clock settings, homepage note limit (`blog.latestNotesLimit`), contact links, and analytics flag.
 - The homepage section labels (`blog` and `contact`) are intentionally hardcoded in `src/pages/index.tsx`; there is no `home` config section.
-- Blog titles and descriptions are hardcoded in `src/pages/blog/index.tsx`, along with its introduction. Blog and About navigation labels are hardcoded in `PageShell.tsx`; `blog` in the JSON contains only `revalidateSeconds` and `latestNotesLimit`.
+- The Blog title and introduction are hardcoded in `src/pages/blog/index.tsx`. Blog and About navigation labels are hardcoded in `PageShell.tsx`; `blog` in the JSON contains only `revalidateSeconds` and `latestNotesLimit`.
 - Keep configurable profile text in JSON rather than hardcoding it in components. The About title and description are intentionally hardcoded in `src/pages/about.tsx`, and its navigation label in `PageShell.tsx`; the biography still comes from JSON.
 - `url` supplies canonical URLs, social preview links, RSS URLs, and the sitemap origin. Set it to the deployed site's origin before deployment. `NEXT_PUBLIC_URL` and `SITE_URL` are no longer used.
 - JSON imports are bundled into the site. Local development reflects edits; deployed sites require a rebuild and redeploy.
@@ -63,13 +63,12 @@ The Notion database must provide these properties:
 | Property | Type |
 | --- | --- |
 | `title` | Title |
-| `description` | Rich text |
 | `published` | Checkbox |
 | `published_at` | Date |
 | `hashtags` | Multi-select |
 | `cover` | Files & media (documented in README) |
 
-`notesApi.ts` reads the page object's cover for the note cover image. Page IDs and timestamps are Notion metadata, not database properties. Only notes with `published` checked appear. Keep property names and types compatible with the mapper in `notesApi.ts`; it assumes populated title, description, and publication date values. Slugs are derived from the full title by trimming, lowercasing, and replacing consecutive whitespace with a dash; no Notion `slug` property is required. Titles must produce unique slugs, and renaming a title changes its URL.
+`notesApi.ts` reads the page object's cover for the note cover image. Page IDs and timestamps are Notion metadata, not database properties. Only notes with `published` checked appear. Keep property names and types compatible with the mapper in `notesApi.ts`; it assumes populated title and publication date values. Descriptions are not used, and no Notion `description` property is required. Slugs are derived from the full title by trimming, lowercasing, and replacing consecutive whitespace with a dash; no Notion `slug` property is required. Titles must produce unique slugs, and renaming a title changes its URL.
 
 ## Routing and generation
 

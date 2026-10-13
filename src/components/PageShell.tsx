@@ -20,7 +20,7 @@ export function PageShell({ seoTitle, seoDescription, current, children }: Props
   const router = useRouter();
   const path = router.asPath === '/' ? '' : router.asPath;
   const canonical = `${site.url.replace(/\/$/, '')}${path}`;
-  const ogImage = `${site.url.replace(/\/$/, '')}/api/og?title=${encodeURIComponent(seoTitle)}&description=${encodeURIComponent(seoDescription ?? '')}`;
+  const ogImage = `${site.url.replace(/\/$/, '')}/api/og?title=${encodeURIComponent(seoTitle)}${seoDescription ? `&description=${encodeURIComponent(seoDescription)}` : ''}`;
 
   return (
     <>

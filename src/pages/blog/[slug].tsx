@@ -17,13 +17,13 @@ type Props = {
 };
 
 export default function Note({
-  note: { title, description, createdAt, publishedAt, tags },
+  note: { title, createdAt, publishedAt, tags },
   noteContent,
   older,
 }: Props) {
   const router = useRouter();
   const url = `${site.url.replace(/\/$/, '')}${router.asPath}`;
-  const openGraphImageUrl = `${site.url.replace(/\/$/, '')}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
+  const openGraphImageUrl = `${site.url.replace(/\/$/, '')}/api/og?title=${encodeURIComponent(title)}`;
 
   return (
     <>
@@ -31,11 +31,11 @@ export default function Note({
         url={url}
         images={[openGraphImageUrl]}
         title={title}
+        description={title}
         datePublished={createdAt}
         authorName={site.name}
-        description={description}
       />
-      <PageShell seoTitle={title} seoDescription={description} current="blog">
+      <PageShell seoTitle={title} current="blog">
         <article className="mt-[72px]">
           <header>
             <p className="text-faint">

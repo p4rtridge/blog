@@ -15,7 +15,6 @@ export type Note = {
   coverImage: string | null;
   tags: string[];
   title: string;
-  description: string;
   slug: string;
   isPublished: boolean;
   publishedAt: string;
@@ -157,10 +156,6 @@ class NotesApi {
               ? page.properties.hashtags.multi_select.map((tag) => tag.name)
               : [],
           title,
-          description:
-            'rich_text' in page.properties.description
-              ? page.properties.description.rich_text[0].plain_text
-              : '',
           slug: title.trim().toLowerCase().replace(/\s+/g, '-'),
           isPublished:
             'checkbox' in page.properties.published ? page.properties.published.checkbox : false,
