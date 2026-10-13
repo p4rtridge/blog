@@ -62,7 +62,7 @@ export default function Note({
               ← all posts
             </Link>
             {older && (
-              <Link href={`/blog/${older.slug}`} className="faint-link text-right">
+              <Link href={`/blog/${encodeURIComponent(older.slug)}`} className="faint-link text-right">
                 next: {older.title} →
               </Link>
             )}

@@ -51,7 +51,7 @@ Notes database properties:
 | `hashtags`    | Multi-select  |
 | `cover`       | Files & Media |
 
-Post slugs are generated from the full title: lowercase with spaces replaced by dashes (for example, `My First Post` becomes `/blog/my-first-post`). No Notion `slug` property is needed. Use titles that produce unique slugs; changing a title changes the post URL.
+Post slugs are generated from the full title: remove URL delimiters (`?`, `#`, `/`), lowercase, and replace spaces with dashes (for example, `My First Post` becomes `/blog/my-first-post`). No Notion `slug` property is needed. Use titles that produce unique slugs; changing a title changes the post URL.
 
 ## Layout
 

@@ -15,7 +15,7 @@ const rss: NextApiHandler = async (req, res) => {
   allPosts.map((post) => {
     feed.item({
       title: post.title,
-      url: `${site.url.replace(/\/$/, '')}/blog/${post.slug}`,
+      url: `${site.url.replace(/\/$/, '')}/blog/${encodeURIComponent(post.slug)}`,
       date: post.publishedAt,
       description: '',
     });

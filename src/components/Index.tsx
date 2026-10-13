@@ -108,7 +108,7 @@ export function IndexRow({
 export function NoteRow({ note, withTags = false }: { note: Note; withTags?: boolean }) {
   return (
     <IndexRow
-      href={`/blog/${note.slug}`}
+      href={`/blog/${encodeURIComponent(note.slug)}`}
       lead={dotDate(note.publishedAt)}
       main={note.title}
       trail={withTags ? note.tags.join(', ') : undefined}

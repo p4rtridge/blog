@@ -4,6 +4,8 @@ import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/
 import { compareAsc, compareDesc } from 'date-fns';
 import { getPlaiceholder } from 'plaiceholder';
 
+import { noteSlug } from './slug';
+
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
@@ -156,7 +158,7 @@ class NotesApi {
               ? page.properties.hashtags.multi_select.map((tag) => tag.name)
               : [],
           title,
-          slug: title.trim().toLowerCase().replace(/\s+/g, '-'),
+          slug: noteSlug(title),
           isPublished:
             'checkbox' in page.properties.published ? page.properties.published.checkbox : false,
           publishedAt:
