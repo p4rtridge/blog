@@ -16,7 +16,7 @@
   ],
   "analyticsEnabled": true,
   "clock": {
-    "enabled": true,
+    "enabled": false,
     "timeZone": "Asia/Ho_Chi_Minh",
     "label": "in Vietnam"
   },
